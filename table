@@ -1,3 +1,5 @@
+1) Create a table named emp
+
 create table emp
 (EmpNo int primary key,
 Ename varchar(20),
@@ -7,6 +9,8 @@ Hiredate date,
 Salary int,
 Commission int,
 DeptNo int);
+
+2) Insert all the values given in the above table 
 
 insert into emp values(7389, 'King', 'President', null, '1981-11-17', 5000, null, 10),
 (7698, 'Blake', 'Manager', 7389, '1981-05-01', 2850, null, 30),
@@ -21,3 +25,116 @@ insert into emp values(7389, 'King', 'President', null, '1981-11-17', 5000, null
 (7876, 'Adams', 'Clerk', 7788, '1983-01-12', 1100, null, 20),
 (7900, 'James', 'Clerk', 7698, '1981-12-03', 950, null, 30),
 (7934, 'Miller', 'Clerk', 7782, '1982-01-23', 1300, null, 10);
+
+3) Display all the details of table emp
+
+select * from emp;
+
+4) Display details of employee whose salary is between 1500 to 5000
+
+select * from emp
+where salary between 1500 and 5000;
+
+5) Display details of employee whose job is analyst
+
+select * from emp
+where job='analyst';
+
+6) Display details of employee whose job is manager, analyst and clerk
+
+select * from emp
+where job in('manager', 'analyst', 'clerk');
+
+7) Display details of employee whose name start with 'm'
+
+select * from emp
+where ename like('m%');
+
+8) Calculate the annual salary of the employee from the table. Label the column as annual salary
+
+select ename, salary*12 'Annual Salary'
+from emp;
+
+9) Show the employee name in descending order
+
+select * from emp
+order by ename desc;
+
+10) Eliminate the duplicate value from job from the table
+
+select distinct(job)
+from emp; 
+
+11) Display employee name in uppercase
+
+select upper(ename) 'Ename'
+from emp;
+
+12) Display length of employee name
+
+select ename, length(ename) 'Length'
+from emp;
+
+13) Display sum of salary department wise
+
+select deptno, sum(salary)
+from emp group by deptno;
+
+14) Display the sum of salary for each job
+
+select job, sum(salary)
+from emp
+where salary group by job;
+
+15) Display the avg salary for dept 10
+
+select deptno, avg(salary) 'Average Salary'
+from emp where deptno=10;
+
+16) Display min and max salary for dept 10 and 20
+
+select deptno, min(salary), max(salary) from emp
+where deptno=10 or deptno=20
+group by deptno;
+
+17) Display the record of the emp who never get a commission
+
+select ename, commission from emp
+where commission is null;
+
+18) Display the record of the emp who gets commission
+
+select ename, commission from emp
+where commission is not null;
+
+19) Add a constraint primary key for employee no. in table employee
+
+alter table emp
+add primary key (empno);
+
+20) Display total number of emp from table
+
+select count(ename) 'Total employee' from emp;
+
+21) Create a table name department 
+
+create table department
+(DeptNo int primary key,
+Dname varchar(10));
+
+22) Add a column called location for department table 
+
+alter table department
+add Location varchar(20);
+
+23) Change the info in table emp from king to queen
+
+update emp
+set ename='Queen'
+where empno=7389;
+
+24) Display the emp name whose job is salesman or clerk and their salary should not be 1250, 1500 and 1100
+
+select ename, job, salary from emp
+where job in ('salesman', 'clerk') and
+salary not in (1250, 1500, 1100);
